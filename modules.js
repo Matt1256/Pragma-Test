@@ -12,7 +12,7 @@ function destroy() {
 			//Hide data if it is checked
 			hide.appendChild(document.getElementById('hide' + i));
 
-			//Sort ID's of li and inpu tags (Not working)
+			//Sort ID's of li and input tags (Not working)
 			for (var j = 0; j < sortList.length; j++) {
 				sortList[j].setAttribute('id', 'hide' + j);
 				sortInput[j].setAttribute('id', 'item' + j);
