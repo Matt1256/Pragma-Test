@@ -1,18 +1,24 @@
 function destroy() {
 	var hide = document.createElement('template');
-	var listLength = document.getElementById('list').getElementsByTagName('li').length;
+	var sortList = document.getElementsByTagName('li');
+	var sortInput = document.getElementsByTagName('input');
 
-	for (var i = 1; i < listLength + 1; i++) {
+	for (var i = 0; i < sortList.length; i++) {
 		var item = document.getElementById('item' + i);
 
 		if (item.checked) {
 			hide.appendChild(document.getElementById('hide' + i));
+
+			for (var j = 0; j < sortList.length; j++) {
+				sortList[j].setAttribute('id', 'hide' + j);
+				sortInput[j].setAttribute('id', 'item' + j);
+			}
 		}
 	}
 }
 
 var num = 1;
-var itemID = 0;
+var itemID = -1;
 
 function add() {
 	itemID++;
