@@ -1,17 +1,15 @@
 function destroy() {
 	//Adding the template tag to hide data
 	var hide = document.createElement('template');
-	var sortList = document.getElementsByTagName('li');
 	var item = document.getElementById('get').getElementsByTagName('input');
 
 	//Going through each li element to check if it's checked
 	for (var i = 0; i < sortList.length; i++) {
-
 		if (item[i].checked) {
 			//Hide data if it is checked
 			hide.appendChild(document.getElementById('hide' + i));
 
-			//Sort ID's of li and input tags 
+			//Sort ID's of li and input tags
 			for (var j = 0; j < sortList.length; j++) {
 				sortList[j].setAttribute('id', 'hide' + j);
 				item[j].setAttribute('id', 'item' + j);
@@ -22,11 +20,9 @@ function destroy() {
 
 //Variables declared outside so it doesn't change when add function is clicked
 var num = 1;
-var itemID = -1;
+var sortList = document.getElementsByTagName('li');
 
 function add() {
-	//increments so that each item has unique ID
-	itemID++;
 
 	//Creating necessary elements to add to the list
 	var li = document.createElement('li');
@@ -37,8 +33,8 @@ function add() {
 
 	//Setting attributes of elements for formatting and functionality
 	c.setAttribute('type', 'checkbox');
-	c.setAttribute('id', 'item' + itemID);
-	li.setAttribute('id', 'hide' + itemID);
+	c.setAttribute('id', 'item' + sortList.length);
+	li.setAttribute('id', 'hide' + sortList.length);
 	a.setAttribute('href', '#');
 	a.setAttribute('class', 'text');
 
