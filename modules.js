@@ -2,20 +2,19 @@ function destroy() {
 	//Adding the template tag to hide data
 	var hide = document.createElement('template');
 	var sortList = document.getElementsByTagName('li');
-	var sortInput = document.getElementsByTagName('input');
+	var item = document.getElementById('get').getElementsByTagName('input');
 
 	//Going through each li element to check if it's checked
 	for (var i = 0; i < sortList.length; i++) {
-		var item = document.getElementById('item' + i);
 
-		if (item.checked) {
+		if (item[i].checked) {
 			//Hide data if it is checked
 			hide.appendChild(document.getElementById('hide' + i));
 
-			//Sort ID's of li and input tags (Not working)
+			//Sort ID's of li and input tags 
 			for (var j = 0; j < sortList.length; j++) {
 				sortList[j].setAttribute('id', 'hide' + j);
-				sortInput[j].setAttribute('id', 'item' + j);
+				item[j].setAttribute('id', 'item' + j);
 			}
 		}
 	}
