@@ -1,29 +1,63 @@
-function destroy() {
+//Variables declared outside so it doesn't change when add function is clicked
+var num = 1;
+var sortList = document.getElementsByTagName('li');
+
+class headings extends HTMLElement {
+	connectedCallback() {
+		this.innerHTML = `
+		<title>Pragma Test</title>
+			<link rel="stylesheet" href="style.css" />
+		
+			<body>
+				<div>
+					<h1>My To Do List</h1>
+					<input type="text" id="add" placeholder="Add item" />
+					<button onclick="add()" class="addBtn" id="btn">Add</button>
+					<button onclick="destroy()" class="addBtn">Delete</button>
+					<input type="text" id="search" onkeyup="search()" placeholder="Search" />
+					<button id="all" onclick="selectAll()">Select all</button>
+				</div>
+		
+				<div id="get">
+					<ul id="list"></ul>
+				</div>
+			</body>`;
+	}
+}
+
+customElements.define('heading-element', headings);
+
+var selectAll = () => {
+	var select = document.getElementById('get').getElementsByTagName('input');
+
+	for (var i = 0; i < select.length; i++) {
+		select[i].checked = true;
+	}
+};
+
+var destroy = () => {
 	//Adding the template tag to hide data
 	var hide = document.createElement('template');
 	var item = document.getElementById('get').getElementsByTagName('input');
 
 	//Going through each li element to check if it's checked
-	for (var i = 0; i < sortList.length; i++) {
-		if (item[i].checked) {
+	for (var i = 0; item.length > 0; i++) {
+		var id = document.getElementById('item' + i);
+
+		if (id.checked) {
 			//Hide data if it is checked
 			hide.appendChild(document.getElementById('hide' + i));
-
-			//Sort ID's of li and input tags
-			for (var j = 0; j < sortList.length; j++) {
-				sortList[j].setAttribute('id', 'hide' + j);
-				item[j].setAttribute('id', 'item' + j);
-			}
 		}
 	}
-}
 
-//Variables declared outside so it doesn't change when add function is clicked
-var num = 1;
-var sortList = document.getElementsByTagName('li');
+	//Sort ID of the li tags
+	for (var j = 0; j < item.length; j++) {
+		sortList[j].setAttribute('id', 'hide' + j);
+		item[j].setAttribute('id', 'item' + j);
+	}
+};
 
-function add() {
-
+var add = () => {
 	//Creating necessary elements to add to the list
 	var li = document.createElement('li');
 	var input = document.getElementById('add').value;
@@ -33,8 +67,8 @@ function add() {
 
 	//Setting attributes of elements for formatting and functionality
 	c.setAttribute('type', 'checkbox');
-	c.setAttribute('id', 'item' + sortList.length);
 	li.setAttribute('id', 'hide' + sortList.length);
+	c.setAttribute('id', 'item' + sortList.length);
 	a.setAttribute('href', '#');
 	a.setAttribute('class', 'text');
 
@@ -56,7 +90,7 @@ function add() {
 			var list = document.querySelector('ul');
 			list.addEventListener(
 				'click',
-				function(ev) {
+				ev => {
 					if (ev.target.tagName == 'LI') {
 						ev.target.classList.toggle('checked');
 					}
@@ -67,9 +101,9 @@ function add() {
 		}
 	}
 	document.getElementById('add').value = '';
-}
+};
 
-function search() {
+var search = () => {
 	//Declaring variables
 	var input, filter, ul, li, a, i, txtValue;
 	input = document.getElementById('search');
@@ -88,4 +122,4 @@ function search() {
 			li[i].style.display = 'none';
 		}
 	}
-}
+};
