@@ -39,9 +39,10 @@ var destroy = () => {
 	//Adding the template tag to hide data
 	var hide = document.createElement('template');
 	var item = document.getElementById('get').getElementsByTagName('input');
+	const length = item.length;
 
 	//Going through each li element to check if it's checked
-	for (var i = 0; item.length > 0; i++) {
+	for (var i = 0; i < length; i++) {
 		var id = document.getElementById('item' + i);
 
 		if (id.checked) {
